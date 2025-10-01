@@ -167,6 +167,9 @@ class TiendaApplicationTests {
 	void test10() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.min((p1, p2) -> Double.compare(p1.getPrecio(), p2.getPrecio()))
+			.ifPresent(p -> System.out.println("Producto más barato: " + p.getNombre() + ", Precio: " + p.getPrecio()));
 	}
 	
 	/**
