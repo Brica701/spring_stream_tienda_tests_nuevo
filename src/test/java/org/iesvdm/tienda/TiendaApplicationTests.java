@@ -291,6 +291,9 @@ class TiendaApplicationTests {
 	void test20() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.filter(p -> p.getNombre().contains("Portátil"))
+			.forEach(p -> System.out.println("Producto que contiene la cadena 'Portátil' en el nombre: " + p.getNombre()));
 	}
 	
 	/**
@@ -300,6 +303,9 @@ class TiendaApplicationTests {
 	void test21() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.filter(p -> p.getNombre().contains("Monitor") && p.getPrecio() < 215)
+			.forEach(p -> System.out.println("Producto que contiene la cadena 'Monitor' en el nombre y precio inferior a 215€: " + p.getNombre()));
 	}
 	
 	/**
@@ -309,6 +315,17 @@ class TiendaApplicationTests {
 	void test22() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.filter(p -> p.getPrecio() >= 180)
+			.sorted((p1, p2) -> {
+				int precioCompare = Double.compare(p2.getPrecio(), p1.getPrecio());
+				if (precioCompare != 0) {
+					return precioCompare; 
+				} else {
+					return p1.getNombre().compareTo(p2.getNombre()); 
+				}
+			})
+			.forEach(p -> System.out.println("Nombre: " + p.getNombre() + ", Precio: " + p.getPrecio()));
 	}
 	
 	/**
@@ -319,6 +336,9 @@ class TiendaApplicationTests {
 	void test23() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.sorted((p1, p2) -> p1.getFabricante().getNombre().compareTo(p2.getFabricante().getNombre()))
+			.forEach(p -> System.out.println("Nombre: " + p.getNombre() + ", Precio: " + p.getPrecio() + ", Fabricante: " + p.getFabricante().getNombre()));
 	}
 	
 	/**
