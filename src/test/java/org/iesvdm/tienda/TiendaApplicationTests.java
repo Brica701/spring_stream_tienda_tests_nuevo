@@ -265,6 +265,10 @@ class TiendaApplicationTests {
 	void test18() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.forEach(
+				p -> System.out.println("Nombre: " + p.getNombre() + ", Precio en céntimos: " + (p.getPrecio() * 100))
+			);
 	}
 	
 	
