@@ -48,6 +48,7 @@ class TiendaApplicationTests {
 	void test1() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.forEach(p -> System.out.println("Nombre: " + p.getNombre() + " Precio: " + p.getPrecio()));
 	}
 	
 	
@@ -58,6 +59,13 @@ class TiendaApplicationTests {
 	void test2() {
 		var listProds = prodRepo.findAll();
 		//TODO
+				final double tasaConversion = 1.1;
+		listProds.stream()
+				.forEach(producto -> {
+					double precioDolares = producto.getPrecio() * tasaConversion;
+					System.out.println("Nombre: " + producto.getNombre() + ", Precio en Dólares: " + precioDolares);
+				});
+		
 	}
 	
 	/**
@@ -66,7 +74,9 @@ class TiendaApplicationTests {
 	@Test
 	void test3() {
 		var listProds = prodRepo.findAll();
-		//TODO
+		    listProds.forEach(p -> 
+        System.out.println("Nombre: " + p.getNombre().toUpperCase() + ", Precio: " + p.getPrecio())
+    );
 	}
 	
 	/**
@@ -76,6 +86,9 @@ class TiendaApplicationTests {
 	void test4() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+				listFabs.forEach(f -> 
+            System.out.println("Nombre: " + f.getNombre() + ", Dos primeras mayúsculas: " + f.getNombre().substring(0, 2).toUpperCase())
+        );
 	}
 	
 	/**
@@ -85,6 +98,9 @@ class TiendaApplicationTests {
 	void test5() {
 		var listFabs = fabRepo.findAll();
 		//TODO		
+		listFabs.stream()
+			.filter(f -> !f.getProductos().isEmpty())
+			.forEach(f -> System.out.println("Código del fabricante con productos: " + f.getCodigo()));
 	}
 	
 	/**
@@ -94,6 +110,10 @@ class TiendaApplicationTests {
 	void test6() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+		listFabs.stream()
+			.map(Fabricante::getNombre)
+			.sorted((n1, n2) -> n2.compareTo(n1)) 
+			.forEach(nombre -> System.out.println("Nombre del fabricante: " + nombre));
 	}
 	
 	/**
@@ -103,6 +123,16 @@ class TiendaApplicationTests {
 	void test7() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.sorted((p1, p2) -> {
+				int nombreCompare = p1.getNombre().compareTo(p2.getNombre());
+				if (nombreCompare != 0) {
+					return nombreCompare; 
+				} else {
+					return Double.compare(p2.getPrecio(), p1.getPrecio()); 
+				}
+			})
+			.forEach(p -> System.out.println("Nombre: " + p.getNombre() + ", Precio: " + p.getPrecio()));
 	}
 	
 	/**
@@ -112,6 +142,9 @@ class TiendaApplicationTests {
 	void test8() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+		listFabs.stream()
+			.limit(5)
+			.forEach(f -> System.out.println("Fabricante: " + f.getNombre()));
 	}
 	
 	/**
@@ -121,6 +154,10 @@ class TiendaApplicationTests {
 	void test9() {
 		var listFabs = fabRepo.findAll();
 		//TODO		
+		listFabs.stream()
+			.skip(3) 
+			.limit(2) 
+			.forEach(f -> System.out.println("Fabricante: " + f.getNombre()));
 	}
 	
 	/**
