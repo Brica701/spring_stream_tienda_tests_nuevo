@@ -204,6 +204,9 @@ class TiendaApplicationTests {
 	void test13() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.filter(p -> p.getPrecio() <= 120)
+			.forEach(p -> System.out.println("Producto con precio menor o igual a 120€: " + p.getNombre()));
 	}
 	
 	/**
@@ -213,6 +216,9 @@ class TiendaApplicationTests {
 	void test14() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds .stream()
+			.filter(p -> p.getPrecio() >= 400)
+			.forEach(p -> System.out.println("Producto con precio mayor o igual a 400€: " + p.getNombre()));
 	}
 	
 	/**
@@ -222,6 +228,9 @@ class TiendaApplicationTests {
 	void test15() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.filter(p -> p.getPrecio() >= 80 && p.getPrecio() <= 300)
+			.forEach(p -> System.out.println("Producto con precio entre 80€ y 300€: " + p.getNombre()));
 	}
 	
 	/**
@@ -231,6 +240,9 @@ class TiendaApplicationTests {
 	void test16() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.filter(p -> p.getPrecio() > 200 && p.getFabricante() .getCodigo()== 6)
+			.forEach (p -> System.out.println("Producto con precio mayor a 200€ y código de fabricante igual a 6:"));
 	}
 	
 	/**
@@ -240,6 +252,10 @@ class TiendaApplicationTests {
 	void test17() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		List<Integer> codigosFabricantes = List.of(1,3,5);
+		listProds.stream()
+			.filter(p -> codigosFabricantes.contains(p.getFabricante().getCodigo()))
+			.forEach(p -> System.out.println("Producto con código de fabricante 1, 3 o 5: " + p.getNombre()));
 	}
 	
 	/**
