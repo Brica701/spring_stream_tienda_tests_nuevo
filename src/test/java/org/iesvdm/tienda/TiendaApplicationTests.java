@@ -279,7 +279,9 @@ class TiendaApplicationTests {
 	void test19() {
 		var listFabs = fabRepo.findAll();
 		//TODOS
-		
+		listFabs.stream()
+			.filter(f -> f.getNombre().startsWith("S"))
+			.forEach(f -> System.out.println("Fabricante cuyo nombre empieza por S: " + f.getNombre()));
 	}
 	
 	/**
