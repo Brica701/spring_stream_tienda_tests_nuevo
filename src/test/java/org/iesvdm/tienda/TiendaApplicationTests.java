@@ -179,6 +179,9 @@ class TiendaApplicationTests {
 	void test11() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.max((p1, p2) -> Double.compare(p1.getPrecio(), p2.getPrecio()))
+			.ifPresent(p -> System.out.println("Producto más caro: " + p.getNombre() + ", Precio: " + p.getPrecio()));
 	}
 	
 	/**
@@ -189,6 +192,9 @@ class TiendaApplicationTests {
 	void test12() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.filter(p -> p.getFabricante().getCodigo() == 2)
+			.forEach(p -> System.out.println("Producto del fabricante con código igual a 2: " + p.getNombre()));	
 	}
 	
 	/**
