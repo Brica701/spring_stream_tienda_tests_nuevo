@@ -348,6 +348,9 @@ class TiendaApplicationTests {
 	void test24() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.max((p1, p2) -> Double.compare(p1.getPrecio(), p2.getPrecio()))
+			.ifPresent(p -> System.out.println("Producto más caro: " + p.getNombre() + ", Precio: " + p.getPrecio() + ", Fabricante: " + p.getFabricante().getNombre()));
 	}
 	
 	/**
