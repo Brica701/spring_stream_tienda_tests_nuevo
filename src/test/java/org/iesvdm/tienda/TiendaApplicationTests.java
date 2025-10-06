@@ -485,9 +485,9 @@ Fabricante: Xiaomi
 	void test29() {
 		var listFabs = fabRepo.findAll();
 		//TODO
-		listFabs.stream()
-			.filter(f -> f.getProductos().isEmpty())
-			.forEach(f -> System.out.println("Fabricante sin productos: " + f.getNombre()));
+        listFabs .stream()
+            .filter(f -> f.getProductos().isEmpty())
+            .forEach(f -> System.out.println("Fabricante sin productos: " + f.getNombre()));
 	}
 	
 	/**
@@ -588,6 +588,7 @@ Fabricante: Xiaomi
 	void test37() {
 		var listProds = prodRepo.findAll();
 		//TODO
+
 	}
 	
 	/**
@@ -614,6 +615,10 @@ Hewlett-Packard              2
 	void test38() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+        listFabs .stream()
+            .sorted((f1, f2) -> Integer.compare(f2.getProductos().size(), f1.getProductos().size()))
+            .forEach(f -> System.out.println(String.format("%15s %10d", f.getNombre(), f.getProductos().size())));
+
 	}
 	
 	/**
