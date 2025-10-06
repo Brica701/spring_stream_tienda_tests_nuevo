@@ -360,6 +360,9 @@ class TiendaApplicationTests {
 	void test25() {
 		var listProds = prodRepo.findAll();
 		//TODO	
+		listProds.stream()
+			.filter(p -> p.getFabricante().getNombre().equals("Crucial") && p.getPrecio() > 200)
+			.forEach(p -> System.out.println("Producto del fabricante Crucial con precio mayor a 200€: " + p.getNombre()));
 	}
 	
 	/**
@@ -368,7 +371,12 @@ class TiendaApplicationTests {
 	@Test
 	void test26() {
 		var listProds = prodRepo.findAll();
-		//TODO
+		listProds.stream()
+			.filter(p -> {
+				String fabricanteNombre = p.getFabricante().getNombre();
+				return fabricanteNombre.equals("Asus") || fabricanteNombre.equals("Hewlett-Packard") || fabricanteNombre.equals("Seagate");
+			})
+			.forEach(p -> System.out.println("Producto: " + p.getNombre() + ", Fabricante: " + p.getFabricante().getNombre()));
 	}
 	
 	/**
@@ -389,6 +397,17 @@ Monitor 27 LED Full HD |199.25190000000003|Asus
 	void test27() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.filter(p -> p.getPrecio() >= 180)
+			.sorted((p1, p2) -> {
+				int precioCompare = Double.compare(p2.getPrecio(), p1.getPrecio());
+				if (precioCompare != 0) {
+					return precioCompare; 
+				} else {
+					return p1.getNombre().compareTo(p2.getNombre()); 
+				}
+			})
+			.forEach(p -> System.out.println(String.format("%-22s|%-18s|%s", p.getNombre(), p.getPrecio(), p.getFabricante().getNombre())));
 	}
 	
 	/**
