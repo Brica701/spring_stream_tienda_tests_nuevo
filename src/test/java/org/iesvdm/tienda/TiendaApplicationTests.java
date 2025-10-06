@@ -467,7 +467,15 @@ Fabricante: Xiaomi
 	@Test
 	void test28() {
 		var listFabs = fabRepo.findAll();
-		//TODO
+		listFabs.stream()
+			.forEach(f -> {
+				System.out.println("Fabricante: " + f.getNombre());
+				System.out.println("\n\tProductos:");
+				f.getProductos().stream()
+					.map(Producto::getNombre)
+					.forEach(p -> System.out.println("\t" + p));
+				System.out.println();
+			});
 	}
 	
 	/**
@@ -477,6 +485,9 @@ Fabricante: Xiaomi
 	void test29() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+		listFabs.stream()
+			.filter(f -> f.getProductos().isEmpty())
+			.forEach(f -> System.out.println("Fabricante sin productos: " + f.getNombre()));
 	}
 	
 	/**
@@ -485,7 +496,8 @@ Fabricante: Xiaomi
 	@Test
 	void test30() {
 		var listProds = prodRepo.findAll();
-		//TODO
+		long totalProductos = listProds.stream().count();
+		System.out.println("Número total de productos: " + totalProductos);
 	}
 
 	
@@ -496,6 +508,10 @@ Fabricante: Xiaomi
 	void test31() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.map(p -> p.getFabricante().getCodigo())
+			.distinct()
+			.forEach(codigo -> System.out.println("Código de fabricante con productos: " + codigo));
 	}
 	
 	/**
@@ -505,6 +521,10 @@ Fabricante: Xiaomi
 	void test32() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.mapToDouble(Producto::getPrecio)
+			.average()
+			.ifPresent(media -> System.out.println("Media del precio de todos los productos: " + media));
 	}
 	
 	/**
@@ -514,6 +534,10 @@ Fabricante: Xiaomi
 	void test33() {
 		var listProds = prodRepo.findAll();
 		//TODO
+		listProds.stream()
+			.mapToDouble(Producto::getPrecio)
+			.min()
+			.ifPresent(minimo -> System.out.println("Precio más barato de todos los productos: " + minimo));
 	}
 	
 	/**
@@ -522,7 +546,11 @@ Fabricante: Xiaomi
 	@Test
 	void test34() {
 		var listProds = prodRepo.findAll();
-		//TODO	
+		//TODO
+		double sumaPrecios = listProds.stream()
+        .mapToDouble(Producto::getPrecio)
+        .sum();
+    System.out.println("Suma de los precios de todos los productos: " + sumaPrecios);
 	}
 	
 	/**
@@ -540,7 +568,11 @@ Fabricante: Xiaomi
 	@Test
 	void test36() {
 		var listProds = prodRepo.findAll();
-		//TODO
+		listProds.stream()
+			.filter(p -> p.getFabricante().getNombre().equals("Asus"))
+			.mapToDouble(Producto::getPrecio)
+			.average()
+			.ifPresent(media -> System.out.println("Media del precio de los productos del fabricante Asus: " + media));
 	}
 	
 	
