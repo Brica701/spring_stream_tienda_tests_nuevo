@@ -560,6 +560,10 @@ Fabricante: Xiaomi
 	void test35() {
 		var listProds = prodRepo.findAll();
 		//TODO		
+		long countAsus = listProds.stream()
+			.filter(p -> p.getFabricante().getNombre().equals("Asus"))
+			.count();
+		System.out.println("Número de productos del fabricante Asus: " + countAsus);
 	}
 	
 	/**
