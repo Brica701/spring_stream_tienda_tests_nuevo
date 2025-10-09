@@ -665,7 +665,7 @@ Hewlett-Packard              2
                     double max = stats[3] > 0 ? stats[1] : 0.0;
                     double media = stats[3] > 0 ? stats[2] / stats[3] : 0.0;
 
-                    System.out.printf("%-15s  Min: %8.2f  Max: %8.2f  Media: %8.2f%n",
+                    System.out.printf("Fabricante: %s | Min: %.2f | Max: %.2f | Media: %.2f%n",
                             fab.getNombre(), min, max, media);
                 });
 
@@ -729,6 +729,7 @@ Hewlett-Packard              2
         listFabs.stream()
             .filter(fab -> fab.getProductos().size() >= 2)
             .forEach(fab -> System.out.println("Fabricante con 2 o más productos: " + fab.getNombre()));
+
 	}
 	
 	/**
